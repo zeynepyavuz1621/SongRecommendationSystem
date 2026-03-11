@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 
 # Load your dataset (change the name to your actual file)
-df = pd.read_csv('dataset.csv')
+df = pd.read_csv('raw_dataset.csv')
 
 # Look at the raw data ranges
 #print(df.describe())
@@ -52,9 +52,9 @@ print(f"T8 (statistics after normalization)\n{df_normalized.describe()}")
 
 # BEGIN ONE HOT ENCODING FOR GENRE COLUMN
 genre_encodes = pd.get_dummies(df_normalized['track_genre'], prefix='genre', dtype=int)
-df_final = pd.concat([df_normalized, genre_encodes*0.2], axis=1)
-print(f"T9 (after genre one-hot encoded) shape: {df_final.shape}")
+df_encoded = pd.concat([df_normalized, genre_encodes*0.2], axis=1)
+print(f"T9 (after genre one-hot encoded) shape: {df_encoded.shape}")
 # END ONE HOT ENCODING FOR GENRE COLUMN
 
-df_final.to_csv('processed_dataset.csv', index=False)
+df_encoded.to_csv('encoded_preprocessed_dataset.csv', index=False)
 print('Preprocessed Dataset saved.')
